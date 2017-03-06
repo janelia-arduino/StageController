@@ -18,19 +18,21 @@ License:
   "result":{
     "firmware":["StageController"],
     "functions":[
-      "dispensePellet",
-      "enableDispenser",
-      "disableDispenser",
       "homeStage",
       "stageHoming",
       "stageHomed",
       "moveStageTo",
+      "moveStageSoftlyTo",
       "getStagePositions"
     ],
     "parameters":[
       "stage_positions"
     ],
-    "properties":[],
+    "properties":[
+      "stageChannelCount",
+      "stagePositionMin",
+      "stagePositionMax"
+    ],
     "callbacks":[]
   }
 }

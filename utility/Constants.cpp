@@ -27,24 +27,28 @@ const modular_server::FirmwareInfo firmware_info =
 // Interrupts
 
 // Units
-CONSTANT_STRING(mm_unit,"mm");
 
 // Properties
-const ConstantString * const switch_active_polarity_default = &step_dir_controller::constants::polarity_high;
+CONSTANT_STRING(stage_channel_count_property_name,"stageChannelCount");
+const long stage_channel_count_min = 1;
+const long stage_channel_count_max = step_dir_controller::constants::CHANNEL_COUNT;
+const long stage_channel_count_default = stage_channel_count_max;
+
+CONSTANT_STRING(stage_position_min_property_name,"stagePositionMin");
+const double stage_position_min_default = 0;
+
+CONSTANT_STRING(stage_position_max_property_name,"stagePositionMax");
+const double stage_position_max_default = 1000000000;
 
 // Parameters
 CONSTANT_STRING(stage_positions_parameter_name,"stage_positions");
-const double stage_position_min = 0;
-const double stage_position_max = 140;
 
 // Functions
-CONSTANT_STRING(dispense_pellet_function_name,"dispensePellet");
-CONSTANT_STRING(enable_dispenser_function_name,"enableDispenser");
-CONSTANT_STRING(disable_dispenser_function_name,"disableDispenser");
 CONSTANT_STRING(home_stage_function_name,"homeStage");
 CONSTANT_STRING(stage_homing_function_name,"stageHoming");
 CONSTANT_STRING(stage_homed_function_name,"stageHomed");
 CONSTANT_STRING(move_stage_to_function_name,"moveStageTo");
+CONSTANT_STRING(move_stage_softly_to_function_name,"moveStageSoftlyTo");
 CONSTANT_STRING(get_stage_positions_function_name,"getStagePositions");
 
 // Callbacks

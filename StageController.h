@@ -38,19 +38,19 @@ class StageController : public StepperController
 {
 public:
   StageController();
-  virtual void setup();
+  virtual void setup(bool use_drivers=true);
   virtual void update();
 
-  void dispensePellet();
-  void enableDispenser();
-  void disableDispenser();
+  typedef Array<double,step_dir_controller::constants::CHANNEL_COUNT> PositionsArray;
 
   bool homeStage();
   bool stageHoming();
   bool stageHomed();
 
-  bool moveStageTo(Array<double,stage_controller::constants::STAGE_CHANNEL_COUNT> stage_positions);
-  Array<double,stage_controller::constants::STAGE_CHANNEL_COUNT> getStagePositions();
+  bool moveStageTo(PositionsArray stage_positions);
+  bool moveStageSoftlyTo(PositionsArray stage_positions);
+
+  PositionsArray getStagePositions();
 
 private:
   modular_server::Property properties_[stage_controller::constants::PROPERTY_COUNT_MAX];
@@ -58,17 +58,20 @@ private:
   modular_server::Function functions_[stage_controller::constants::FUNCTION_COUNT_MAX];
   modular_server::Callback callbacks_[stage_controller::constants::CALLBACK_COUNT_MAX];
 
+  bool using_drivers_;
   bool stage_homing_;
   bool stage_homed_;
 
+  PositionsArray jsonArrayToPositionsArray(ArduinoJson::JsonArray & json_array);
+
   // Handlers
-  void dispensePelletHandler();
-  void enableDispenserHandler();
-  void disableDispenserHandler();
+  void setStageChannelCountHandler();
+  void setStagePositionLimitsHandler();
   void homeStageHandler();
   void stageHomingHandler();
   void stageHomedHandler();
   void moveStageToHandler();
+  void moveStageSoftlyToHandler();
   void getStagePositionsHandler();
 
 };
