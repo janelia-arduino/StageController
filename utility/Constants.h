@@ -19,7 +19,7 @@ namespace constants
 //MAX values must be >= 1, >= created/copied count, < RAM limit
 enum{PROPERTY_COUNT_MAX=3};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=6};
+enum{FUNCTION_COUNT_MAX=10};
 enum{CALLBACK_COUNT_MAX=1};
 
 extern ConstantString device_name;
@@ -53,7 +53,11 @@ extern ConstantString stage_homing_function_name;
 extern ConstantString stage_homed_function_name;
 extern ConstantString move_stage_to_function_name;
 extern ConstantString move_stage_softly_to_function_name;
+extern ConstantString move_stage_by_function_name;
+extern ConstantString move_stage_softly_by_function_name;
+extern ConstantString move_stage_at_function_name;
 extern ConstantString get_stage_positions_function_name;
+extern ConstantString stage_at_target_positions_function_name;
 
 // Callbacks
 

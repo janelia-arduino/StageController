@@ -63,6 +63,7 @@ void StageController::setup(bool use_drivers)
   stage_positions_parameter.setTypeDouble();
 
   setStageChannelCountHandler();
+  setStagePositionLimitsHandler();
 
   // Functions
   modular_server::Function & home_stage_function = modular_server_.createFunction(constants::home_stage_function_name);
@@ -91,6 +92,10 @@ void StageController::setup(bool use_drivers)
   modular_server::Function & get_stage_positions_function = modular_server_.createFunction(constants::get_stage_positions_function_name);
   get_stage_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::getStagePositionsHandler));
   get_stage_positions_function.setReturnTypeArray();
+
+  modular_server::Function & stage_at_target_positions_function = modular_server_.createFunction(constants::stage_at_target_positions_function_name);
+  stage_at_target_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::stageAtTargetPositionsHandler));
+  stage_at_target_positions_function.setReturnTypeBool();
 
   // Callbacks
 }
@@ -198,6 +203,44 @@ bool StageController::moveStageSoftlyTo(PositionsArray stage_positions)
   return true;
 }
 
+bool StageController::moveStageBy(PositionsArray stage_positions)
+{
+  if (stage_homed_)
+  {
+    long stage_channel_count;
+    modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
+
+    for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+    {
+      moveBy(channel,stage_positions[channel]);
+    }
+  }
+  else
+  {
+    return false;
+  }
+  return true;
+}
+
+bool StageController::moveStageSoftlyBy(PositionsArray stage_positions)
+{
+  if (stage_homed_)
+  {
+    long stage_channel_count;
+    modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
+
+    for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+    {
+      moveSoftlyBy(channel,stage_positions[channel]);
+    }
+  }
+  else
+  {
+    return false;
+  }
+  return true;
+}
+
 StageController::PositionsArray StageController::getStagePositions()
 {
   long stage_channel_count;
@@ -231,6 +274,22 @@ StageController::PositionsArray StageController::jsonArrayToPositionsArray(Ardui
     }
   }
   return positions_array;
+}
+
+bool StageController::stageAtTargetPositions()
+{
+
+  long stage_channel_count;
+  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
+
+  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+  {
+    if (!atTargetPosition(channel))
+    {
+      return false;
+    }
+  }
+  return true;
 }
 
 // Handlers must be non-blocking (avoid 'delay')
@@ -331,5 +390,11 @@ void StageController::getStagePositionsHandler()
     modular_server_.response().write(stage_positions[channel]);
   }
   modular_server_.response().endArray();
+}
+
+void StageController::stageAtTargetPositionsHandler()
+{
+  bool stage_at_target_positions = stageAtTargetPositions();
+  modular_server_.response().returnResult(stage_at_target_positions);
 }
 

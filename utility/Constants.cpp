@@ -49,7 +49,11 @@ CONSTANT_STRING(stage_homing_function_name,"stageHoming");
 CONSTANT_STRING(stage_homed_function_name,"stageHomed");
 CONSTANT_STRING(move_stage_to_function_name,"moveStageTo");
 CONSTANT_STRING(move_stage_softly_to_function_name,"moveStageSoftlyTo");
+CONSTANT_STRING(move_stage_by_function_name,"moveStageBy");
+CONSTANT_STRING(move_stage_softly_by_function_name,"moveStageSoftlyBy");
+CONSTANT_STRING(move_stage_at_function_name,"moveStageAt");
 CONSTANT_STRING(get_stage_positions_function_name,"getStagePositions");
+CONSTANT_STRING(stage_at_target_positions_function_name,"stageAtTargetPositions");
 
 // Callbacks
 

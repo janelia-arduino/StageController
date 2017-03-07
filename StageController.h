@@ -49,8 +49,11 @@ public:
 
   bool moveStageTo(PositionsArray stage_positions);
   bool moveStageSoftlyTo(PositionsArray stage_positions);
+  bool moveStageBy(PositionsArray stage_positions);
+  bool moveStageSoftlyBy(PositionsArray stage_positions);
 
   PositionsArray getStagePositions();
+  bool stageAtTargetPositions();
 
 private:
   modular_server::Property properties_[stage_controller::constants::PROPERTY_COUNT_MAX];
@@ -72,7 +75,11 @@ private:
   void stageHomedHandler();
   void moveStageToHandler();
   void moveStageSoftlyToHandler();
+  void moveStageByHandler();
+  void moveStageSoftlyByHandler();
+  void moveStageAtHandler();
   void getStagePositionsHandler();
+  void stageAtTargetPositionsHandler();
 
 };
 
