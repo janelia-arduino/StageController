@@ -48,22 +48,19 @@ void StageController::setup(bool use_drivers)
                               callbacks_);
 
   // Properties
+  modular_server::Property & stage_positions_min_property = modular_server_.createProperty(constants::stage_positions_min_property_name,constants::stage_positions_min_default);
+
+  modular_server::Property & stage_positions_max_property = modular_server_.createProperty(constants::stage_positions_max_property_name,constants::stage_positions_max_default);
+
   modular_server::Property & stage_channel_count_property = modular_server_.createProperty(constants::stage_channel_count_property_name,constants::stage_channel_count_default);
   stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
   stage_channel_count_property.attachPostSetValueFunctor(makeFunctor((Functor0 *)0,*this,&StageController::setStageChannelCountHandler));
-
-  modular_server::Property & stage_position_min_property = modular_server_.createProperty(constants::stage_position_min_property_name,constants::stage_position_min_default);
-  stage_position_min_property.attachPostSetValueFunctor(makeFunctor((Functor0 *)0,*this,&StageController::setStagePositionLimitsHandler));
-
-  modular_server::Property & stage_position_max_property = modular_server_.createProperty(constants::stage_position_max_property_name,constants::stage_position_max_default);
-  stage_position_max_property.attachPostSetValueFunctor(makeFunctor((Functor0 *)0,*this,&StageController::setStagePositionLimitsHandler));
 
   // Parameters
   modular_server::Parameter & stage_positions_parameter = modular_server_.createParameter(constants::stage_positions_parameter_name);
   stage_positions_parameter.setTypeDouble();
 
   setStageChannelCountHandler();
-  setStagePositionLimitsHandler();
 
   // Functions
   modular_server::Function & home_stage_function = modular_server_.createFunction(constants::home_stage_function_name);
@@ -92,6 +89,10 @@ void StageController::setup(bool use_drivers)
   modular_server::Function & get_stage_positions_function = modular_server_.createFunction(constants::get_stage_positions_function_name);
   get_stage_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::getStagePositionsHandler));
   get_stage_positions_function.setReturnTypeArray();
+
+  modular_server::Function & get_stage_target_positions_function = modular_server_.createFunction(constants::get_stage_target_positions_function_name);
+  get_stage_target_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::getStageTargetPositionsHandler));
+  get_stage_target_positions_function.setReturnTypeArray();
 
   modular_server::Function & stage_at_target_positions_function = modular_server_.createFunction(constants::stage_at_target_positions_function_name);
   stage_at_target_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::stageAtTargetPositionsHandler));
@@ -165,16 +166,18 @@ bool StageController::stageHomed()
   return stage_homed_;
 }
 
-bool StageController::moveStageTo(PositionsArray stage_positions)
+bool StageController::moveStageTo(PositionsArray absolute_positions)
 {
   if (stage_homed_)
   {
     long stage_channel_count;
     modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
 
+    double position;
     for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
     {
-      moveTo(channel,stage_positions[channel]);
+      position = limitedPosition(channel,absolute_positions[channel]);
+      moveTo(channel,position);
     }
   }
   else
@@ -184,16 +187,18 @@ bool StageController::moveStageTo(PositionsArray stage_positions)
   return true;
 }
 
-bool StageController::moveStageSoftlyTo(PositionsArray stage_positions)
+bool StageController::moveStageSoftlyTo(PositionsArray absolute_positions)
 {
   if (stage_homed_)
   {
     long stage_channel_count;
     modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
 
+    double position;
     for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
     {
-      moveSoftlyTo(channel,stage_positions[channel]);
+      position = limitedPosition(channel,absolute_positions[channel]);
+      moveSoftlyTo(channel,position);
     }
   }
   else
@@ -203,16 +208,21 @@ bool StageController::moveStageSoftlyTo(PositionsArray stage_positions)
   return true;
 }
 
-bool StageController::moveStageBy(PositionsArray stage_positions)
+bool StageController::moveStageBy(PositionsArray relative_positions)
 {
   if (stage_homed_)
   {
     long stage_channel_count;
     modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
 
+    PositionsArray stage_positions = getStagePositions();
+
+    double position;
     for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
     {
-      moveBy(channel,stage_positions[channel]);
+      position = stage_positions[channel] + relative_positions[channel];
+      position = limitedPosition(channel,position);
+      moveTo(channel,position);
     }
   }
   else
@@ -222,16 +232,21 @@ bool StageController::moveStageBy(PositionsArray stage_positions)
   return true;
 }
 
-bool StageController::moveStageSoftlyBy(PositionsArray stage_positions)
+bool StageController::moveStageSoftlyBy(PositionsArray relative_positions)
 {
   if (stage_homed_)
   {
     long stage_channel_count;
     modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
 
+    PositionsArray stage_positions = getStagePositions();
+
+    double position;
     for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
     {
-      moveSoftlyBy(channel,stage_positions[channel]);
+      position = stage_positions[channel] + relative_positions[channel];
+      position = limitedPosition(channel,position);
+      moveSoftlyTo(channel,position);
     }
   }
   else
@@ -252,6 +267,57 @@ StageController::PositionsArray StageController::getStagePositions()
     stage_positions.push_back(getPosition(channel));
   }
   return stage_positions;
+}
+
+StageController::PositionsArray StageController::getStageTargetPositions()
+{
+  long stage_channel_count;
+  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
+
+  PositionsArray stage_positions;
+  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+  {
+    stage_positions.push_back(getTargetPosition(channel));
+  }
+  return stage_positions;
+}
+
+bool StageController::stageAtTargetPositions()
+{
+
+  long stage_channel_count;
+  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
+
+  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+  {
+    if (!atTargetPosition(channel))
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+double StageController::limitedPosition(const size_t channel,
+                                        const double position)
+{
+  double stage_position_min;
+  modular_server_.property(constants::stage_positions_min_property_name).getElementValue(channel,stage_position_min);
+
+  double stage_position_max;
+  modular_server_.property(constants::stage_positions_max_property_name).getElementValue(channel,stage_position_max);
+
+  double new_position = position;
+
+  if (new_position < stage_position_min)
+  {
+    new_position = stage_position_min;
+  }
+  else if (new_position > stage_position_max)
+  {
+    new_position = stage_position_max;
+  }
+  return new_position;
 }
 
 StageController::PositionsArray StageController::jsonArrayToPositionsArray(ArduinoJson::JsonArray & json_array)
@@ -276,22 +342,6 @@ StageController::PositionsArray StageController::jsonArrayToPositionsArray(Ardui
   return positions_array;
 }
 
-bool StageController::stageAtTargetPositions()
-{
-
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
-  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
-  {
-    if (!atTargetPosition(channel))
-    {
-      return false;
-    }
-  }
-  return true;
-}
-
 // Handlers must be non-blocking (avoid 'delay')
 //
 // modular_server_.parameter(parameter_name).getValue(value) value type must be either:
@@ -314,20 +364,14 @@ void StageController::setStageChannelCountHandler()
   long stage_channel_count;
   modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
 
+  modular_server::Property & stage_positions_min_property = modular_server_.property(constants::stage_positions_min_property_name);
+  stage_positions_min_property.setArrayLengthRange(stage_channel_count,stage_channel_count);
+
+  modular_server::Property & stage_positions_max_property = modular_server_.property(constants::stage_positions_max_property_name);
+  stage_positions_max_property.setArrayLengthRange(stage_channel_count,stage_channel_count);
+
   modular_server::Parameter & stage_positions_parameter = modular_server_.parameter(constants::stage_positions_parameter_name);
   stage_positions_parameter.setArrayLengthRange(stage_channel_count,stage_channel_count);
-}
-
-void StageController::setStagePositionLimitsHandler()
-{
-  double stage_position_min;
-  modular_server_.property(constants::stage_position_min_property_name).getValue(stage_position_min);
-
-  double stage_position_max;
-  modular_server_.property(constants::stage_position_max_property_name).getValue(stage_position_max);
-
-  modular_server::Parameter & stage_positions_parameter = modular_server_.parameter(constants::stage_positions_parameter_name);
-  stage_positions_parameter.setRange(stage_position_min,stage_position_max);
 }
 
 void StageController::homeStageHandler()
@@ -388,6 +432,22 @@ void StageController::getStagePositionsHandler()
   for (size_t channel=0; channel<stage_positions.size(); ++channel)
   {
     modular_server_.response().write(stage_positions[channel]);
+  }
+  modular_server_.response().endArray();
+}
+
+void StageController::getStageTargetPositionsHandler()
+{
+  long stage_channel_count;
+  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
+
+  PositionsArray target_positions = getStageTargetPositions();
+
+  modular_server_.response().writeResultKey();
+  modular_server_.response().beginArray();
+  for (size_t channel=0; channel<target_positions.size(); ++channel)
+  {
+    modular_server_.response().write(target_positions[channel]);
   }
   modular_server_.response().endArray();
 }

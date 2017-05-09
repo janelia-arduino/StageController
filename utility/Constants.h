@@ -19,7 +19,7 @@ namespace constants
 //MAX values must be >= 1, >= created/copied count, < RAM limit
 enum{PROPERTY_COUNT_MAX=3};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=10};
+enum{FUNCTION_COUNT_MAX=11};
 enum{CALLBACK_COUNT_MAX=1};
 
 extern ConstantString device_name;
@@ -33,16 +33,16 @@ extern const modular_server::FirmwareInfo firmware_info;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
+extern ConstantString stage_positions_min_property_name;
+extern const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern ConstantString stage_positions_max_property_name;
+extern const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+
 extern ConstantString stage_channel_count_property_name;
 extern const long stage_channel_count_min;
 extern const long stage_channel_count_max;
 extern const long stage_channel_count_default;
-
-extern ConstantString stage_position_min_property_name;
-extern const double stage_position_min_default;
-
-extern ConstantString stage_position_max_property_name;
-extern const double stage_position_max_default;
 
 // Parameters
 extern ConstantString stage_positions_parameter_name;
@@ -57,6 +57,7 @@ extern ConstantString move_stage_by_function_name;
 extern ConstantString move_stage_softly_by_function_name;
 extern ConstantString move_stage_at_function_name;
 extern ConstantString get_stage_positions_function_name;
+extern ConstantString get_stage_target_positions_function_name;
 extern ConstantString stage_at_target_positions_function_name;
 
 // Callbacks

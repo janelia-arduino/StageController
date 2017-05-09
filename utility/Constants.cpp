@@ -29,16 +29,26 @@ const modular_server::FirmwareInfo firmware_info =
 // Units
 
 // Properties
+CONSTANT_STRING(stage_positions_min_property_name,"stagePositionMin");
+const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    -1E9,
+    -1E9,
+    -1E9,
+  };
+
+CONSTANT_STRING(stage_positions_max_property_name,"stagePositionMax");
+const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    1E9,
+    1E9,
+    1E9,
+  };
+
 CONSTANT_STRING(stage_channel_count_property_name,"stageChannelCount");
 const long stage_channel_count_min = 1;
 const long stage_channel_count_max = step_dir_controller::constants::CHANNEL_COUNT;
 const long stage_channel_count_default = stage_channel_count_max;
-
-CONSTANT_STRING(stage_position_min_property_name,"stagePositionMin");
-const double stage_position_min_default = 0;
-
-CONSTANT_STRING(stage_position_max_property_name,"stagePositionMax");
-const double stage_position_max_default = 1000000000;
 
 // Parameters
 CONSTANT_STRING(stage_positions_parameter_name,"stage_positions");
@@ -53,6 +63,7 @@ CONSTANT_STRING(move_stage_by_function_name,"moveStageBy");
 CONSTANT_STRING(move_stage_softly_by_function_name,"moveStageSoftlyBy");
 CONSTANT_STRING(move_stage_at_function_name,"moveStageAt");
 CONSTANT_STRING(get_stage_positions_function_name,"getStagePositions");
+CONSTANT_STRING(get_stage_target_positions_function_name,"getStageTargetPositions");
 CONSTANT_STRING(stage_at_target_positions_function_name,"stageAtTargetPositions");
 
 // Callbacks

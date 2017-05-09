@@ -47,13 +47,17 @@ public:
   bool stageHoming();
   bool stageHomed();
 
-  bool moveStageTo(PositionsArray stage_positions);
-  bool moveStageSoftlyTo(PositionsArray stage_positions);
-  bool moveStageBy(PositionsArray stage_positions);
-  bool moveStageSoftlyBy(PositionsArray stage_positions);
+  bool moveStageTo(PositionsArray absolute_positions);
+  bool moveStageSoftlyTo(PositionsArray absolute_positions);
+  bool moveStageBy(PositionsArray relative_positions);
+  bool moveStageSoftlyBy(PositionsArray relative_positions);
 
   PositionsArray getStagePositions();
+  PositionsArray getStageTargetPositions();
   bool stageAtTargetPositions();
+
+  double limitedPosition(const size_t channel,
+                         const double position);
 
 private:
   modular_server::Property properties_[stage_controller::constants::PROPERTY_COUNT_MAX];
@@ -69,7 +73,6 @@ private:
 
   // Handlers
   void setStageChannelCountHandler();
-  void setStagePositionLimitsHandler();
   void homeStageHandler();
   void stageHomingHandler();
   void stageHomedHandler();
@@ -79,6 +82,7 @@ private:
   void moveStageSoftlyByHandler();
   void moveStageAtHandler();
   void getStagePositionsHandler();
+  void getStageTargetPositionsHandler();
   void stageAtTargetPositionsHandler();
 
 };
