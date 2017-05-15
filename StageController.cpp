@@ -65,38 +65,39 @@ void StageController::setup(bool use_drivers)
   // Functions
   modular_server::Function & home_stage_function = modular_server_.createFunction(constants::home_stage_function_name);
   home_stage_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::homeStageHandler));
-  home_stage_function.setReturnTypeBool();
+  home_stage_function.setResultTypeBool();
 
   modular_server::Function & stage_homing_function = modular_server_.createFunction(constants::stage_homing_function_name);
   stage_homing_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::stageHomingHandler));
-  stage_homing_function.setReturnTypeBool();
-  stage_homing_function.setReturnTypeBool();
+  stage_homing_function.setResultTypeBool();
 
   modular_server::Function & stage_homed_function = modular_server_.createFunction(constants::stage_homed_function_name);
   stage_homed_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::stageHomedHandler));
-  stage_homed_function.setReturnTypeBool();
+  stage_homed_function.setResultTypeBool();
 
   modular_server::Function & move_stage_to_function = modular_server_.createFunction(constants::move_stage_to_function_name);
   move_stage_to_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::moveStageToHandler));
   move_stage_to_function.addParameter(stage_positions_parameter);
-  move_stage_to_function.setReturnTypeBool();
+  move_stage_to_function.setResultTypeBool();
 
   modular_server::Function & move_stage_softly_to_function = modular_server_.createFunction(constants::move_stage_softly_to_function_name);
   move_stage_softly_to_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::moveStageSoftlyToHandler));
   move_stage_softly_to_function.addParameter(stage_positions_parameter);
-  move_stage_softly_to_function.setReturnTypeBool();
+  move_stage_softly_to_function.setResultTypeBool();
 
   modular_server::Function & get_stage_positions_function = modular_server_.createFunction(constants::get_stage_positions_function_name);
   get_stage_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::getStagePositionsHandler));
-  get_stage_positions_function.setReturnTypeArray();
+  get_stage_positions_function.setResultTypeArray();
+  get_stage_positions_function.setResultTypeDouble();
 
   modular_server::Function & get_stage_target_positions_function = modular_server_.createFunction(constants::get_stage_target_positions_function_name);
   get_stage_target_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::getStageTargetPositionsHandler));
-  get_stage_target_positions_function.setReturnTypeArray();
+  get_stage_target_positions_function.setResultTypeArray();
+  get_stage_target_positions_function.setResultTypeDouble();
 
   modular_server::Function & stage_at_target_positions_function = modular_server_.createFunction(constants::stage_at_target_positions_function_name);
   stage_at_target_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&StageController::stageAtTargetPositionsHandler));
-  stage_at_target_positions_function.setReturnTypeBool();
+  stage_at_target_positions_function.setResultTypeBool();
 
   // Callbacks
 }
