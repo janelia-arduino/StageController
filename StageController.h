@@ -43,7 +43,7 @@ public:
   virtual void setup(bool use_drivers=true);
   virtual void update();
 
-  typedef Array<double,stage_controller::constants::STAGE_CHANNEL_COUNT_MAX> PositionsArray;
+  typedef Array<double,step_dir_controller::constants::CHANNEL_COUNT> PositionsArray;
 
   bool homeStage();
   bool stageHoming();

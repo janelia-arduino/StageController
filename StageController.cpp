@@ -54,7 +54,7 @@ void StageController::setup(bool use_drivers)
   modular_server_.createProperty(constants::stage_positions_max_property_name,constants::stage_positions_max_default);
 
   modular_server::Property & stage_channel_count_property = modular_server_.createProperty(constants::stage_channel_count_property_name,constants::stage_channel_count_default);
-  stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::STAGE_CHANNEL_COUNT_MAX);
+  stage_channel_count_property.setRange(constants::stage_channel_count_min,step_dir_controller::constants::CHANNEL_COUNT);
   stage_channel_count_property.attachPostSetValueFunctor(makeFunctor((Functor0 *)0,*this,&StageController::setStageChannelCountHandler));
 
   // Parameters
