@@ -34,8 +34,6 @@ const double stage_positions_max_default[step_dir_controller::constants::CHANNEL
     1E9,
   };
 
-const long stage_channel_count_default = step_dir_controller::constants::CHANNEL_COUNT;
-
 // Parameters
 
 // Functions

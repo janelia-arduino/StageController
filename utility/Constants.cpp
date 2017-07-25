@@ -35,6 +35,8 @@ CONSTANT_STRING(stage_positions_max_property_name,"stagePositionMax");
 
 CONSTANT_STRING(stage_channel_count_property_name,"stageChannelCount");
 const long stage_channel_count_min = 1;
+const long stage_channel_count_max = step_dir_controller::constants::CHANNEL_COUNT;
+const long stage_channel_count_default = step_dir_controller::constants::CHANNEL_COUNT;
 
 // Parameters
 CONSTANT_STRING(stage_positions_parameter_name,"stage_positions");

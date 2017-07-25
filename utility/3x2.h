@@ -23,9 +23,6 @@ namespace constants
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
-extern const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT];
-
-extern const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 // Parameters
 
