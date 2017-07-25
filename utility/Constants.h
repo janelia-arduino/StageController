@@ -34,14 +34,11 @@ extern const modular_server::FirmwareInfo firmware_info;
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
 extern ConstantString stage_positions_min_property_name;
-extern const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern ConstantString stage_positions_max_property_name;
-extern const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern ConstantString stage_channel_count_property_name;
 extern const long stage_channel_count_min;
-extern const long stage_channel_count_max;
 extern const long stage_channel_count_default;
 
 // Parameters

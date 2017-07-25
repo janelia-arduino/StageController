@@ -16,6 +16,7 @@ namespace stage_controller
 {
 namespace constants
 {
+enum {STAGE_CHANNEL_COUNT_MAX=3};
 
 // Interrupts
 
@@ -23,6 +24,9 @@ namespace constants
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
+extern const double stage_positions_min_default[STAGE_CHANNEL_COUNT_MAX];
+
+extern const double stage_positions_max_default[STAGE_CHANNEL_COUNT_MAX];
 
 // Parameters
 

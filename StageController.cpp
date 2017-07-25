@@ -29,6 +29,7 @@ void StageController::setup(bool use_drivers)
   }
 
   // Variable Setup
+  stage_homing_ = false;
   stage_homed_ = false;
 
   // Pin Setup
@@ -48,12 +49,12 @@ void StageController::setup(bool use_drivers)
                               callbacks_);
 
   // Properties
-  modular_server::Property & stage_positions_min_property = modular_server_.createProperty(constants::stage_positions_min_property_name,constants::stage_positions_min_default);
+  modular_server_.createProperty(constants::stage_positions_min_property_name,constants::stage_positions_min_default);
 
-  modular_server::Property & stage_positions_max_property = modular_server_.createProperty(constants::stage_positions_max_property_name,constants::stage_positions_max_default);
+  modular_server_.createProperty(constants::stage_positions_max_property_name,constants::stage_positions_max_default);
 
   modular_server::Property & stage_channel_count_property = modular_server_.createProperty(constants::stage_channel_count_property_name,constants::stage_channel_count_default);
-  stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
+  stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::STAGE_CHANNEL_COUNT_MAX);
   stage_channel_count_property.attachPostSetValueFunctor(makeFunctor((Functor0 *)0,*this,&StageController::setStageChannelCountHandler));
 
   // Parameters
@@ -458,4 +459,3 @@ void StageController::stageAtTargetPositionsHandler()
   bool stage_at_target_positions = stageAtTargetPositions();
   modular_server_.response().returnResult(stage_at_target_positions);
 }
-

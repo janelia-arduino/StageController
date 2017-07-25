@@ -10,18 +10,23 @@
 #include "Constants.h"
 
 
-#if defined(__AVR_ATmega2560__)
+#if defined(__MK64FX512__)
 
 namespace stage_controller
 {
 namespace constants
 {
+enum {STAGE_CHANNEL_COUNT_MAX=3};
+
 // Interrupts
 
 // Units
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
+extern const double stage_positions_min_default[STAGE_CHANNEL_COUNT_MAX];
+
+extern const double stage_positions_max_default[STAGE_CHANNEL_COUNT_MAX];
 
 // Parameters
 

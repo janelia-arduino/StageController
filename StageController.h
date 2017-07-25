@@ -24,7 +24,7 @@
 
 #include "SPI.h"
 #include "TMC429.h"
-#include "TMC26X.h"
+#include "TMC2130.h"
 
 #include "ModularClient.h"
 
@@ -43,7 +43,7 @@ public:
   virtual void setup(bool use_drivers=true);
   virtual void update();
 
-  typedef Array<double,step_dir_controller::constants::CHANNEL_COUNT> PositionsArray;
+  typedef Array<double,stage_controller::constants::STAGE_CHANNEL_COUNT_MAX> PositionsArray;
 
   bool homeStage();
   bool stageHoming();
