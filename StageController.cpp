@@ -49,6 +49,18 @@ void StageController::setup(bool use_drivers)
                               callbacks_);
 
   // Properties
+  modular_server::Property & switch_active_polarity_property = modular_server_.property(step_dir_controller::constants::switch_active_polarity_property_name);
+  switch_active_polarity_property.setDefaultValue(constants::switch_active_polarity_default);
+
+  modular_server::Property & left_switch_stop_enabled_property = modular_server_.property(step_dir_controller::constants::left_switch_stop_enabled_property_name);
+  left_switch_stop_enabled_property.setDefaultValue(constants::left_switch_stop_enabled_default);
+
+  modular_server::Property & right_switches_enabled_property = modular_server_.property(step_dir_controller::constants::right_switches_enabled_property_name);
+  right_switches_enabled_property.setDefaultValue(constants::right_switches_enabled_default);
+
+  modular_server::Property & right_switch_stop_enabled_property = modular_server_.property(step_dir_controller::constants::right_switch_stop_enabled_property_name);
+  right_switch_stop_enabled_property.setDefaultValue(constants::right_switch_stop_enabled_default);
+
   modular_server_.createProperty(constants::stage_positions_min_property_name,constants::stage_positions_min_default);
 
   modular_server_.createProperty(constants::stage_positions_max_property_name,constants::stage_positions_max_default);

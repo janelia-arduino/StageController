@@ -29,6 +29,10 @@ const modular_server::FirmwareInfo firmware_info =
 // Units
 
 // Properties
+const ConstantString * const switch_active_polarity_default = &step_dir_controller::constants::polarity_high;
+
+const bool right_switches_enabled_default = true;
+
 CONSTANT_STRING(stage_positions_min_property_name,"stagePositionMin");
 
 CONSTANT_STRING(stage_positions_max_property_name,"stagePositionMax");

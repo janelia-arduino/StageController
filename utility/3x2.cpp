@@ -20,6 +20,20 @@ namespace constants
 // Units
 
 // Properties
+const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    true,
+    true,
+    true,
+  };
+
+const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    true,
+    true,
+    true,
+  };
+
 const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     -1E9,
