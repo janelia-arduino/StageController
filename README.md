@@ -28,37 +28,39 @@ License:
 
 [stepper_controller](https://github.com/janelia-modular-devices/stepper_controller.git)
 
-## API
+## API NAMES
 
 ```json
 {
   "id":"getApi",
   "result":{
     "firmware":["StageController"],
+    "verbosity":"NAMES",
     "functions":[
       "homeStage",
       "stageHoming",
       "stageHomed",
       "moveStageTo",
       "moveStageSoftlyTo",
-      "getStagePositions"
+      "getStagePositions",
+      "getStageTargetPositions",
+      "stageAtTargetPositions"
     ],
     "parameters":[
       "stage_positions"
     ],
     "properties":[
-      "stageChannelCount",
       "stagePositionMin",
-      "stagePositionMax"
-    ],
-    "callbacks":[]
+      "stagePositionMax",
+      "stageChannelCount"
+    ]
   }
 }
 ```
 
-## API Verbose
+## API GENERAL
 
-[API Verbose](./api.json)
+[API GENERAL](./api/)
 
 ## More Detailed Modular Device Information
 
