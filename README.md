@@ -42,12 +42,12 @@ License:
       "stageHomed",
       "moveStageTo",
       "moveStageSoftlyTo",
-      "getStagePositions",
-      "getStageTargetPositions",
-      "stageAtTargetPositions"
+      "getStagePosition",
+      "getStageTargetPosition",
+      "stageAtTargetPosition"
     ],
     "parameters":[
-      "stage_positions"
+      "stage_position"
     ],
     "properties":[
       "stagePositionMin",

@@ -41,11 +41,11 @@ extern const bool right_switches_enabled_default;
 
 extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern ConstantString stage_positions_min_property_name;
-extern const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern ConstantString stage_position_min_property_name;
+extern const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern ConstantString stage_positions_max_property_name;
-extern const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern ConstantString stage_position_max_property_name;
+extern const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern ConstantString stage_channel_count_property_name;
 extern const long stage_channel_count_min;
@@ -53,7 +53,7 @@ extern const long stage_channel_count_max;
 extern const long stage_channel_count_default;
 
 // Parameters
-extern ConstantString stage_positions_parameter_name;
+extern ConstantString stage_position_parameter_name;
 
 // Functions
 extern ConstantString home_stage_function_name;
@@ -64,9 +64,9 @@ extern ConstantString move_stage_softly_to_function_name;
 extern ConstantString move_stage_by_function_name;
 extern ConstantString move_stage_softly_by_function_name;
 extern ConstantString move_stage_at_function_name;
-extern ConstantString get_stage_positions_function_name;
-extern ConstantString get_stage_target_positions_function_name;
-extern ConstantString stage_at_target_positions_function_name;
+extern ConstantString get_stage_position_function_name;
+extern ConstantString get_stage_target_position_function_name;
+extern ConstantString stage_at_target_position_function_name;
 
 // Callbacks
 

@@ -43,23 +43,23 @@ public:
   virtual void setup(bool use_drivers=true);
   virtual void update();
 
-  typedef Array<double,step_dir_controller::constants::CHANNEL_COUNT> PositionsArray;
+  typedef Array<long,step_dir_controller::constants::CHANNEL_COUNT> PositionArray;
 
   bool homeStage();
   bool stageHoming();
   bool stageHomed();
 
-  bool moveStageTo(PositionsArray absolute_positions);
-  bool moveStageSoftlyTo(PositionsArray absolute_positions);
-  bool moveStageBy(PositionsArray relative_positions);
-  bool moveStageSoftlyBy(PositionsArray relative_positions);
+  bool moveStageTo(PositionArray absolute_position);
+  bool moveStageSoftlyTo(PositionArray absolute_position);
+  bool moveStageBy(PositionArray relative_position);
+  bool moveStageSoftlyBy(PositionArray relative_position);
 
-  PositionsArray getStagePositions();
-  PositionsArray getStageTargetPositions();
-  bool stageAtTargetPositions();
+  PositionArray getStagePosition();
+  PositionArray getStageTargetPosition();
+  bool stageAtTargetPosition();
 
-  double limitedPosition(const size_t channel,
-                         const double position);
+  long limitedPosition(const size_t channel,
+                       const long position);
 
 private:
   modular_server::Property properties_[stage_controller::constants::PROPERTY_COUNT_MAX];
@@ -71,7 +71,7 @@ private:
   bool stage_homing_;
   bool stage_homed_;
 
-  PositionsArray jsonArrayToPositionsArray(ArduinoJson::JsonArray & json_array);
+  PositionArray jsonArrayToPositionArray(ArduinoJson::JsonArray & json_array);
 
   // Handlers
   void setStageChannelCountHandler();
@@ -83,9 +83,9 @@ private:
   void moveStageByHandler();
   void moveStageSoftlyByHandler();
   void moveStageAtHandler();
-  void getStagePositionsHandler();
-  void getStageTargetPositionsHandler();
-  void stageAtTargetPositionsHandler();
+  void getStagePositionHandler();
+  void getStageTargetPositionHandler();
+  void stageAtTargetPositionHandler();
 
 };
 

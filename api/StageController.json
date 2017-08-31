@@ -25,7 +25,7 @@
       {
         "name":"moveStageTo",
         "parameters":[
-          "stage_positions"
+          "stage_position"
         ],
         "result_info":{
           "type":"bool"
@@ -34,28 +34,28 @@
       {
         "name":"moveStageSoftlyTo",
         "parameters":[
-          "stage_positions"
+          "stage_position"
         ],
         "result_info":{
           "type":"bool"
         }
       },
       {
-        "name":"getStagePositions",
+        "name":"getStagePosition",
         "result_info":{
           "type":"array",
-          "array_element_type":"double"
+          "array_element_type":"long"
         }
       },
       {
-        "name":"getStageTargetPositions",
+        "name":"getStageTargetPosition",
         "result_info":{
           "type":"array",
-          "array_element_type":"double"
+          "array_element_type":"long"
         }
       },
       {
-        "name":"stageAtTargetPositions",
+        "name":"stageAtTargetPosition",
         "result_info":{
           "type":"bool"
         }
@@ -63,22 +63,22 @@
     ],
     "parameters":[
       {
-        "name":"stage_positions",
+        "name":"stage_position",
         "type":"array",
-        "array_element_type":"double"
+        "array_element_type":"long"
       }
     ],
     "properties":[
       {
         "name":"stagePositionMin",
         "type":"array",
-        "array_element_type":"double",
+        "array_element_type":"long",
         "functions":[
           {
             "name":"getValue",
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -88,21 +88,21 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
             "name":"getDefaultValue",
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
             "name":"setValueToDefault",
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -111,7 +111,7 @@
               "element_index"
             ],
             "result_info":{
-              "type":"double"
+              "type":"long"
             }
           },
           {
@@ -122,7 +122,7 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -131,7 +131,7 @@
               "element_index"
             ],
             "result_info":{
-              "type":"double"
+              "type":"long"
             }
           },
           {
@@ -141,7 +141,7 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -151,7 +151,7 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -174,7 +174,7 @@
           {
             "name":"value",
             "type":"array",
-            "array_element_type":"double"
+            "array_element_type":"long"
           },
           {
             "name":"element_index",
@@ -182,7 +182,7 @@
           },
           {
             "name":"element_value",
-            "type":"double"
+            "type":"long"
           },
           {
             "name":"array_length",
@@ -193,13 +193,13 @@
       {
         "name":"stagePositionMax",
         "type":"array",
-        "array_element_type":"double",
+        "array_element_type":"long",
         "functions":[
           {
             "name":"getValue",
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -209,21 +209,21 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
             "name":"getDefaultValue",
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
             "name":"setValueToDefault",
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -232,7 +232,7 @@
               "element_index"
             ],
             "result_info":{
-              "type":"double"
+              "type":"long"
             }
           },
           {
@@ -243,7 +243,7 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -252,7 +252,7 @@
               "element_index"
             ],
             "result_info":{
-              "type":"double"
+              "type":"long"
             }
           },
           {
@@ -262,7 +262,7 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -272,7 +272,7 @@
             ],
             "result_info":{
               "type":"array",
-              "array_element_type":"double"
+              "array_element_type":"long"
             }
           },
           {
@@ -295,7 +295,7 @@
           {
             "name":"value",
             "type":"array",
-            "array_element_type":"double"
+            "array_element_type":"long"
           },
           {
             "name":"element_index",
@@ -303,7 +303,7 @@
           },
           {
             "name":"element_value",
-            "type":"double"
+            "type":"long"
           },
           {
             "name":"array_length",
