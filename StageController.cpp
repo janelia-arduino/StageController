@@ -49,6 +49,9 @@ void StageController::setup(bool use_drivers)
                               callbacks_);
 
   // Properties
+  modular_server::Property & channel_count_property = modular_server_.property(step_dir_controller::constants::channel_count_property_name);
+  channel_count_property.attachPostSetValueFunctor(makeFunctor((Functor0 *)0,*this,&StageController::setChannelCountHandler));
+
   modular_server::Property & switch_active_polarity_property = modular_server_.property(step_dir_controller::constants::switch_active_polarity_property_name);
   switch_active_polarity_property.setDefaultValue(constants::switch_active_polarity_default);
 
@@ -65,15 +68,11 @@ void StageController::setup(bool use_drivers)
 
   modular_server_.createProperty(constants::stage_position_max_property_name,constants::stage_position_max_default);
 
-  modular_server::Property & stage_channel_count_property = modular_server_.createProperty(constants::stage_channel_count_property_name,constants::stage_channel_count_default);
-  stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
-  stage_channel_count_property.attachPostSetValueFunctor(makeFunctor((Functor0 *)0,*this,&StageController::setStageChannelCountHandler));
-
   // Parameters
   modular_server::Parameter & stage_position_parameter = modular_server_.createParameter(constants::stage_position_parameter_name);
   stage_position_parameter.setTypeLong();
 
-  setStageChannelCountHandler();
+  setChannelCountHandler();
 
   // Functions
   modular_server::Function & home_stage_function = modular_server_.createFunction(constants::home_stage_function_name);
@@ -127,14 +126,11 @@ void StageController::update()
     StepDirController::update();
   }
 
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   if (stage_homing_)
   {
     bool stage_homing = false;
     bool stage_homed = true;
-    for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+    for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
       if (!homed(channel))
       {
@@ -151,12 +147,9 @@ bool StageController::homeStage()
 {
   reinitialize();
 
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   bool stage_homing = false;
   bool stage_homed = true;
-  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+  for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
     bool homing = home(channel);
     if (homing)
@@ -184,11 +177,8 @@ bool StageController::moveStageTo(PositionArray absolute_position)
 {
   if (stage_homed_)
   {
-    long stage_channel_count;
-    modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
     long position;
-    for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+    for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
       position = limitedPosition(channel,absolute_position[channel]);
       moveTo(channel,position);
@@ -205,11 +195,8 @@ bool StageController::moveStageSoftlyTo(PositionArray absolute_position)
 {
   if (stage_homed_)
   {
-    long stage_channel_count;
-    modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
     long position;
-    for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+    for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
       position = limitedPosition(channel,absolute_position[channel]);
       moveSoftlyTo(channel,position);
@@ -226,13 +213,10 @@ bool StageController::moveStageBy(PositionArray relative_position)
 {
   if (stage_homed_)
   {
-    long stage_channel_count;
-    modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
     PositionArray stage_position = getStagePosition();
 
     long position;
-    for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+    for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
       position = stage_position[channel] + relative_position[channel];
       position = limitedPosition(channel,position);
@@ -250,13 +234,10 @@ bool StageController::moveStageSoftlyBy(PositionArray relative_position)
 {
   if (stage_homed_)
   {
-    long stage_channel_count;
-    modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
     PositionArray stage_position = getStagePosition();
 
     long position;
-    for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+    for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
       position = stage_position[channel] + relative_position[channel];
       position = limitedPosition(channel,position);
@@ -272,11 +253,8 @@ bool StageController::moveStageSoftlyBy(PositionArray relative_position)
 
 StageController::PositionArray StageController::getStagePosition()
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   PositionArray stage_position;
-  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+  for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
     stage_position.push_back(getPosition(channel));
   }
@@ -285,11 +263,8 @@ StageController::PositionArray StageController::getStagePosition()
 
 StageController::PositionArray StageController::getStageTargetPosition()
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   PositionArray stage_position;
-  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+  for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
     stage_position.push_back(getTargetPosition(channel));
   }
@@ -299,10 +274,7 @@ StageController::PositionArray StageController::getStageTargetPosition()
 bool StageController::stageAtTargetPosition()
 {
 
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
-  for (size_t channel=0; channel<(size_t)stage_channel_count; ++channel)
+  for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
     if (!atTargetPosition(channel))
     {
@@ -336,9 +308,6 @@ long StageController::limitedPosition(const size_t channel,
 
 StageController::PositionArray StageController::jsonArrayToPositionArray(ArduinoJson::JsonArray & json_array)
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   PositionArray position_array;
 
   size_t channel = 0;
@@ -346,7 +315,7 @@ StageController::PositionArray StageController::jsonArrayToPositionArray(Arduino
        position_array_it != json_array.end();
        ++position_array_it)
   {
-    if (channel < (size_t)stage_channel_count)
+    if (channel < getChannelCount())
     {
       long position = *position_array_it;
       position_array.push_back(position);
@@ -373,19 +342,27 @@ StageController::PositionArray StageController::jsonArrayToPositionArray(Arduino
 // modular_server_.property(property_name).getElementValue(element_index,value) value type must match the property array element default type
 // modular_server_.property(property_name).setElementValue(element_index,value) value type must match the property array element default type
 
-void StageController::setStageChannelCountHandler()
+void StageController::setChannelCountHandler()
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
+  if (using_drivers_)
+  {
+    StepperController::setChannelCountHandler();
+  }
+  else
+  {
+    StepDirController::setChannelCountHandler();
+  }
+
+  size_t channel_count = getChannelCount();
 
   modular_server::Property & stage_position_min_property = modular_server_.property(constants::stage_position_min_property_name);
-  stage_position_min_property.setArrayLengthRange(stage_channel_count,stage_channel_count);
+  stage_position_min_property.setArrayLengthRange(channel_count,channel_count);
 
   modular_server::Property & stage_position_max_property = modular_server_.property(constants::stage_position_max_property_name);
-  stage_position_max_property.setArrayLengthRange(stage_channel_count,stage_channel_count);
+  stage_position_max_property.setArrayLengthRange(channel_count,channel_count);
 
   modular_server::Parameter & stage_position_parameter = modular_server_.parameter(constants::stage_position_parameter_name);
-  stage_position_parameter.setArrayLengthRange(stage_channel_count,stage_channel_count);
+  stage_position_parameter.setArrayLengthRange(channel_count,channel_count);
 }
 
 void StageController::homeStageHandler()
@@ -408,9 +385,6 @@ void StageController::stageHomedHandler()
 
 void StageController::moveStageToHandler()
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   ArduinoJson::JsonArray * stage_position_array_ptr;
   modular_server_.parameter(constants::stage_position_parameter_name).getValue(stage_position_array_ptr);
 
@@ -422,9 +396,6 @@ void StageController::moveStageToHandler()
 
 void StageController::moveStageSoftlyToHandler()
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   ArduinoJson::JsonArray * stage_position_array_ptr;
   modular_server_.parameter(constants::stage_position_parameter_name).getValue(stage_position_array_ptr);
 
@@ -436,9 +407,6 @@ void StageController::moveStageSoftlyToHandler()
 
 void StageController::getStagePositionHandler()
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   PositionArray stage_position = getStagePosition();
 
   modular_server_.response().writeResultKey();
@@ -452,9 +420,6 @@ void StageController::getStagePositionHandler()
 
 void StageController::getStageTargetPositionHandler()
 {
-  long stage_channel_count;
-  modular_server_.property(constants::stage_channel_count_property_name).getValue(stage_channel_count);
-
   PositionArray target_position = getStageTargetPosition();
 
   modular_server_.response().writeResultKey();

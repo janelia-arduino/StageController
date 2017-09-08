@@ -43,7 +43,7 @@ public:
   virtual void setup(bool use_drivers=true);
   virtual void update();
 
-  typedef Array<long,step_dir_controller::constants::CHANNEL_COUNT> PositionArray;
+  typedef Array<long,step_dir_controller::constants::CHANNEL_COUNT_MAX> PositionArray;
 
   bool homeStage();
   bool stageHoming();
@@ -61,6 +61,10 @@ public:
   long limitedPosition(const size_t channel,
                        const long position);
 
+protected:
+  // Handlers
+  void setChannelCountHandler();
+
 private:
   modular_server::Property properties_[stage_controller::constants::PROPERTY_COUNT_MAX];
   modular_server::Parameter parameters_[stage_controller::constants::PARAMETER_COUNT_MAX];
@@ -74,7 +78,6 @@ private:
   PositionArray jsonArrayToPositionArray(ArduinoJson::JsonArray & json_array);
 
   // Handlers
-  void setStageChannelCountHandler();
   void homeStageHandler();
   void stageHomingHandler();
   void stageHomedHandler();

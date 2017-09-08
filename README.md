@@ -51,8 +51,7 @@ License:
     ],
     "properties":[
       "stagePositionMin",
-      "stagePositionMax",
-      "stageChannelCount"
+      "stagePositionMax"
     ]
   }
 }

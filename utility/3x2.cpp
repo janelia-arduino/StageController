@@ -20,28 +20,28 @@ namespace constants
 // Units
 
 // Properties
-const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
+const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
    true,
    true,
    true,
   };
 
-const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
+const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
    true,
    true,
    true,
   };
 
-const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
+const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
    -1000000000,
    -1000000000,
    -1000000000,
   };
 
-const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
+const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
    1000000000,
    1000000000,

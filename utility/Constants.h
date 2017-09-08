@@ -17,7 +17,7 @@ namespace stage_controller
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=3};
+enum{PROPERTY_COUNT_MAX=2};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=11};
 enum{CALLBACK_COUNT_MAX=1};
@@ -35,22 +35,17 @@ extern const modular_server::FirmwareInfo firmware_info;
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
 extern const ConstantString * const switch_active_polarity_default;
 
-extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
 
 extern const bool right_switches_enabled_default;
 
-extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
 
 extern ConstantString stage_position_min_property_name;
-extern const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
 
 extern ConstantString stage_position_max_property_name;
-extern const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT];
-
-extern ConstantString stage_channel_count_property_name;
-extern const long stage_channel_count_min;
-extern const long stage_channel_count_max;
-extern const long stage_channel_count_default;
+extern const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
 
 // Parameters
 extern ConstantString stage_position_parameter_name;

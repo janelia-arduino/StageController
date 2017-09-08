@@ -20,7 +20,7 @@ const modular_server::FirmwareInfo firmware_info =
   {
    .name_ptr=&firmware_name,
    .version_major=2,
-   .version_minor=0,
+   .version_minor=1,
    .version_patch=0,
   };
 
@@ -36,11 +36,6 @@ const bool right_switches_enabled_default = true;
 CONSTANT_STRING(stage_position_min_property_name,"stagePositionMin");
 
 CONSTANT_STRING(stage_position_max_property_name,"stagePositionMax");
-
-CONSTANT_STRING(stage_channel_count_property_name,"stageChannelCount");
-const long stage_channel_count_min = 1;
-const long stage_channel_count_max = step_dir_controller::constants::CHANNEL_COUNT;
-const long stage_channel_count_default = step_dir_controller::constants::CHANNEL_COUNT;
 
 // Parameters
 CONSTANT_STRING(stage_position_parameter_name,"stage_position");
