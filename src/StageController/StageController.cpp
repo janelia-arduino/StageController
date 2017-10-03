@@ -5,7 +5,7 @@
 // Authors:
 // Peter Polidoro polidorop@janelia.hhmi.org
 // ----------------------------------------------------------------------------
-#include "StageController.h"
+#include "../StageController.h"
 
 
 using namespace stage_controller;
