@@ -49,17 +49,17 @@ public:
   bool stageHoming();
   bool stageHomed();
 
-  bool moveStageTo(PositionArray absolute_position);
-  bool moveStageSoftlyTo(PositionArray absolute_position);
-  bool moveStageBy(PositionArray relative_position);
-  bool moveStageSoftlyBy(PositionArray relative_position);
+  bool moveStageTo(PositionArray absolute_stage_position);
+  bool moveStageSoftlyTo(PositionArray absolute_stage_position);
+  bool moveStageBy(PositionArray relative_stage_position);
+  bool moveStageSoftlyBy(PositionArray relative_stage_position);
 
   PositionArray getStagePosition();
   PositionArray getStageTargetPosition();
   bool stageAtTargetPosition();
 
-  long limitedPosition(const size_t channel,
-                       const long position);
+  long limitedStagePosition(const size_t channel,
+                            const long absolute_stage_position);
 
 protected:
   // Handlers

@@ -173,14 +173,14 @@ bool StageController::stageHomed()
   return stage_homed_;
 }
 
-bool StageController::moveStageTo(PositionArray absolute_position)
+bool StageController::moveStageTo(PositionArray absolute_stage_position)
 {
   if (stage_homed_)
   {
     long position;
     for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
-      position = limitedPosition(channel,absolute_position[channel]);
+      position = limitedStagePosition(channel,absolute_stage_position[channel]);
       moveTo(channel,position);
     }
   }
@@ -191,14 +191,14 @@ bool StageController::moveStageTo(PositionArray absolute_position)
   return true;
 }
 
-bool StageController::moveStageSoftlyTo(PositionArray absolute_position)
+bool StageController::moveStageSoftlyTo(PositionArray absolute_stage_position)
 {
   if (stage_homed_)
   {
     long position;
     for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
-      position = limitedPosition(channel,absolute_position[channel]);
+      position = limitedStagePosition(channel,absolute_stage_position[channel]);
       moveSoftlyTo(channel,position);
     }
   }
@@ -209,7 +209,7 @@ bool StageController::moveStageSoftlyTo(PositionArray absolute_position)
   return true;
 }
 
-bool StageController::moveStageBy(PositionArray relative_position)
+bool StageController::moveStageBy(PositionArray relative_stage_position)
 {
   if (stage_homed_)
   {
@@ -218,8 +218,8 @@ bool StageController::moveStageBy(PositionArray relative_position)
     long position;
     for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
-      position = stage_position[channel] + relative_position[channel];
-      position = limitedPosition(channel,position);
+      position = stage_position[channel] + relative_stage_position[channel];
+      position = limitedStagePosition(channel,position);
       moveTo(channel,position);
     }
   }
@@ -230,7 +230,7 @@ bool StageController::moveStageBy(PositionArray relative_position)
   return true;
 }
 
-bool StageController::moveStageSoftlyBy(PositionArray relative_position)
+bool StageController::moveStageSoftlyBy(PositionArray relative_stage_position)
 {
   if (stage_homed_)
   {
@@ -239,8 +239,8 @@ bool StageController::moveStageSoftlyBy(PositionArray relative_position)
     long position;
     for (size_t channel=0; channel<getChannelCount(); ++channel)
     {
-      position = stage_position[channel] + relative_position[channel];
-      position = limitedPosition(channel,position);
+      position = stage_position[channel] + relative_stage_position[channel];
+      position = limitedStagePosition(channel,position);
       moveSoftlyTo(channel,position);
     }
   }
@@ -284,8 +284,8 @@ bool StageController::stageAtTargetPosition()
   return true;
 }
 
-long StageController::limitedPosition(const size_t channel,
-                                      const long position)
+long StageController::limitedStagePosition(const size_t channel,
+                                           const long absolute_stage_position)
 {
   long stage_position_min;
   modular_server_.property(constants::stage_position_min_property_name).getElementValue(channel,stage_position_min);
@@ -293,7 +293,7 @@ long StageController::limitedPosition(const size_t channel,
   long stage_position_max;
   modular_server_.property(constants::stage_position_max_property_name).getElementValue(channel,stage_position_max);
 
-  long new_position = position;
+  long new_position = absolute_stage_position;
 
   if (new_position < stage_position_min)
   {
