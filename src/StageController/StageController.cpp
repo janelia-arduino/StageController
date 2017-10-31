@@ -143,6 +143,30 @@ void StageController::update()
   }
 }
 
+void StageController::reinitialize()
+{
+  if (using_drivers_)
+  {
+    StepperController::reinitialize();
+  }
+  else
+  {
+    StepDirController::reinitialize();
+  }
+}
+
+size_t StageController::getChannelCount()
+{
+  if (using_drivers_)
+  {
+    return StepperController::getChannelCount();
+  }
+  else
+  {
+    return StepDirController::getChannelCount();
+  }
+}
+
 bool StageController::homeStage()
 {
   reinitialize();

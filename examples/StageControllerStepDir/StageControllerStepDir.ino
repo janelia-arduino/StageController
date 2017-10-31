@@ -30,7 +30,8 @@ StageController dev;
 
 void setup()
 {
-  dev.setup();
+  const bool use_drivers = false;
+  dev.setup(use_drivers);
   dev.startServer();
 }
 

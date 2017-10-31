@@ -43,6 +43,10 @@ public:
   virtual void setup(bool use_drivers=true);
   virtual void update();
 
+  virtual void reinitialize();
+
+  virtual size_t getChannelCount();
+
   typedef Array<long,step_dir_controller::constants::CHANNEL_COUNT_MAX> PositionArray;
 
   bool homeStage();
