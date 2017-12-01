@@ -32,11 +32,13 @@ License:
 
 ```json
 {
-  "id":"getApi",
-  "result":{
-    "firmware":["StageController"],
-    "verbosity":"NAMES",
-    "functions":[
+  "id": "getApi",
+  "result": {
+    "firmware": [
+      "StageController"
+    ],
+    "verbosity": "NAMES",
+    "functions": [
       "homeStage",
       "stageHoming",
       "stageHomed",
@@ -46,10 +48,10 @@ License:
       "getStageTargetPosition",
       "stageAtTargetPosition"
     ],
-    "parameters":[
+    "parameters": [
       "stage_position"
     ],
-    "properties":[
+    "properties": [
       "stagePositionMin",
       "stagePositionMax"
     ]

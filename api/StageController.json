@@ -1,313 +1,315 @@
 {
-  "id":"getApi",
-  "result":{
-    "firmware":["StageController"],
-    "verbosity":"GENERAL",
-    "functions":[
+  "id": "getApi",
+  "result": {
+    "firmware": [
+      "StageController"
+    ],
+    "verbosity": "GENERAL",
+    "functions": [
       {
-        "name":"homeStage",
-        "result_info":{
-          "type":"bool"
+        "name": "homeStage",
+        "result_info": {
+          "type": "bool"
         }
       },
       {
-        "name":"stageHoming",
-        "result_info":{
-          "type":"bool"
+        "name": "stageHoming",
+        "result_info": {
+          "type": "bool"
         }
       },
       {
-        "name":"stageHomed",
-        "result_info":{
-          "type":"bool"
+        "name": "stageHomed",
+        "result_info": {
+          "type": "bool"
         }
       },
       {
-        "name":"moveStageTo",
-        "parameters":[
+        "name": "moveStageTo",
+        "parameters": [
           "stage_position"
         ],
-        "result_info":{
-          "type":"bool"
+        "result_info": {
+          "type": "bool"
         }
       },
       {
-        "name":"moveStageSoftlyTo",
-        "parameters":[
+        "name": "moveStageSoftlyTo",
+        "parameters": [
           "stage_position"
         ],
-        "result_info":{
-          "type":"bool"
+        "result_info": {
+          "type": "bool"
         }
       },
       {
-        "name":"getStagePosition",
-        "result_info":{
-          "type":"array",
-          "array_element_type":"long"
+        "name": "getStagePosition",
+        "result_info": {
+          "type": "array",
+          "array_element_type": "long"
         }
       },
       {
-        "name":"getStageTargetPosition",
-        "result_info":{
-          "type":"array",
-          "array_element_type":"long"
+        "name": "getStageTargetPosition",
+        "result_info": {
+          "type": "array",
+          "array_element_type": "long"
         }
       },
       {
-        "name":"stageAtTargetPosition",
-        "result_info":{
-          "type":"bool"
+        "name": "stageAtTargetPosition",
+        "result_info": {
+          "type": "bool"
         }
       }
     ],
-    "parameters":[
+    "parameters": [
       {
-        "name":"stage_position",
-        "type":"array",
-        "array_element_type":"long"
+        "name": "stage_position",
+        "type": "array",
+        "array_element_type": "long"
       }
     ],
-    "properties":[
+    "properties": [
       {
-        "name":"stagePositionMin",
-        "type":"array",
-        "array_element_type":"long",
-        "functions":[
+        "name": "stagePositionMin",
+        "type": "array",
+        "array_element_type": "long",
+        "functions": [
           {
-            "name":"getValue",
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "name": "getValue",
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"setValue",
-            "parameters":[
+            "name": "setValue",
+            "parameters": [
               "value"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getDefaultValue",
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "name": "getDefaultValue",
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"setValueToDefault",
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "name": "setValueToDefault",
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getElementValue",
-            "parameters":[
+            "name": "getElementValue",
+            "parameters": [
               "element_index"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setElementValue",
-            "parameters":[
+            "name": "setElementValue",
+            "parameters": [
               "element_index",
               "element_value"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getDefaultElementValue",
-            "parameters":[
+            "name": "getDefaultElementValue",
+            "parameters": [
               "element_index"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setElementValueToDefault",
-            "parameters":[
+            "name": "setElementValueToDefault",
+            "parameters": [
               "element_index"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"setAllElementValues",
-            "parameters":[
+            "name": "setAllElementValues",
+            "parameters": [
               "element_value"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getArrayLength",
-            "result_info":{
-              "type":"long"
+            "name": "getArrayLength",
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setArrayLength",
-            "parameters":[
+            "name": "setArrayLength",
+            "parameters": [
               "array_length"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           }
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"value",
-            "type":"array",
-            "array_element_type":"long"
+            "name": "value",
+            "type": "array",
+            "array_element_type": "long"
           },
           {
-            "name":"element_index",
-            "type":"long"
+            "name": "element_index",
+            "type": "long"
           },
           {
-            "name":"element_value",
-            "type":"long"
+            "name": "element_value",
+            "type": "long"
           },
           {
-            "name":"array_length",
-            "type":"long"
+            "name": "array_length",
+            "type": "long"
           }
         ]
       },
       {
-        "name":"stagePositionMax",
-        "type":"array",
-        "array_element_type":"long",
-        "functions":[
+        "name": "stagePositionMax",
+        "type": "array",
+        "array_element_type": "long",
+        "functions": [
           {
-            "name":"getValue",
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "name": "getValue",
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"setValue",
-            "parameters":[
+            "name": "setValue",
+            "parameters": [
               "value"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getDefaultValue",
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "name": "getDefaultValue",
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"setValueToDefault",
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "name": "setValueToDefault",
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getElementValue",
-            "parameters":[
+            "name": "getElementValue",
+            "parameters": [
               "element_index"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setElementValue",
-            "parameters":[
+            "name": "setElementValue",
+            "parameters": [
               "element_index",
               "element_value"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getDefaultElementValue",
-            "parameters":[
+            "name": "getDefaultElementValue",
+            "parameters": [
               "element_index"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setElementValueToDefault",
-            "parameters":[
+            "name": "setElementValueToDefault",
+            "parameters": [
               "element_index"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"setAllElementValues",
-            "parameters":[
+            "name": "setAllElementValues",
+            "parameters": [
               "element_value"
             ],
-            "result_info":{
-              "type":"array",
-              "array_element_type":"long"
+            "result_info": {
+              "type": "array",
+              "array_element_type": "long"
             }
           },
           {
-            "name":"getArrayLength",
-            "result_info":{
-              "type":"long"
+            "name": "getArrayLength",
+            "result_info": {
+              "type": "long"
             }
           },
           {
-            "name":"setArrayLength",
-            "parameters":[
+            "name": "setArrayLength",
+            "parameters": [
               "array_length"
             ],
-            "result_info":{
-              "type":"long"
+            "result_info": {
+              "type": "long"
             }
           }
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"value",
-            "type":"array",
-            "array_element_type":"long"
+            "name": "value",
+            "type": "array",
+            "array_element_type": "long"
           },
           {
-            "name":"element_index",
-            "type":"long"
+            "name": "element_index",
+            "type": "long"
           },
           {
-            "name":"element_value",
-            "type":"long"
+            "name": "element_value",
+            "type": "long"
           },
           {
-            "name":"array_length",
-            "type":"long"
+            "name": "array_length",
+            "type": "long"
           }
         ]
       }
