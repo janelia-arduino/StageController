@@ -28,6 +28,9 @@ void StageController::setup(bool use_drivers)
     StepDirController::setup();
   }
 
+  // Reset Watchdog
+  resetWatchdog();
+
   // Variable Setup
   stage_homing_ = false;
   stage_homed_ = false;
