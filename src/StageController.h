@@ -50,6 +50,7 @@ public:
 
   typedef Array<long,step_dir_controller::constants::CHANNEL_COUNT_MAX> PositionArray;
 
+  virtual bool home(const size_t channel);
   bool homeStage();
   bool stageHoming();
   bool stageHomed();

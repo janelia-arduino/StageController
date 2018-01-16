@@ -170,24 +170,25 @@ size_t StageController::getChannelCount()
   }
 }
 
+bool StageController::home(const size_t channel)
+{
+  bool homing = StepDirController::home(channel);
+  if (homing)
+  {
+    stage_homing_ = true;
+    stage_homed_ = false;
+  }
+  return homing;
+}
+
 bool StageController::homeStage()
 {
   reinitialize();
-
-  bool stage_homing = false;
-  bool stage_homed = true;
   for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
-    bool homing = home(channel);
-    if (homing)
-    {
-      stage_homing = true;
-      stage_homed = false;
-    }
+    home(channel);
   }
-  stage_homing_ = stage_homing;
-  stage_homed_ = stage_homed;
-  return stage_homing;
+  return stage_homing_;
 }
 
 bool StageController::stageHoming()
