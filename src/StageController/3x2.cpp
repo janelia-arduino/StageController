@@ -22,30 +22,30 @@ namespace constants
 // Properties
 const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
-   true,
-   true,
-   true,
+   left_switch_stop_enabled_element_default,
+   left_switch_stop_enabled_element_default,
+   left_switch_stop_enabled_element_default,
   };
 
 const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
-   true,
-   true,
-   true,
+   right_switch_stop_enabled_element_default,
+   right_switch_stop_enabled_element_default,
+   right_switch_stop_enabled_element_default,
   };
 
 const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
-   -1000000000,
-   -1000000000,
-   -1000000000,
+   stage_position_min_element_default,
+   stage_position_min_element_default,
+   stage_position_min_element_default,
   };
 
 const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
   {
-   1000000000,
-   1000000000,
-   1000000000,
+   stage_position_max_element_default,
+   stage_position_max_element_default,
+   stage_position_max_element_default,
   };
 
 // Parameters

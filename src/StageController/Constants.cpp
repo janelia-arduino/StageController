@@ -21,7 +21,7 @@ const modular_server::FirmwareInfo firmware_info =
    .name_ptr=&firmware_name,
    .version_major=2,
    .version_minor=2,
-   .version_patch=4,
+   .version_patch=5,
   };
 
 // Interrupts
@@ -33,9 +33,15 @@ const ConstantString * const switch_active_polarity_default = &step_dir_controll
 
 const bool right_switches_enabled_default = true;
 
+const bool left_switch_stop_enabled_element_default = true;
+
+const bool right_switch_stop_enabled_element_default = true;
+
 CONSTANT_STRING(stage_position_min_property_name,"stagePositionMin");
+const long stage_position_min_element_default = -1000000000;
 
 CONSTANT_STRING(stage_position_max_property_name,"stagePositionMax");
+const long stage_position_max_element_default = 1000000000;
 
 // Parameters
 CONSTANT_STRING(stage_position_parameter_name,"stage_position");

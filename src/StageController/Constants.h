@@ -36,16 +36,20 @@ extern const modular_server::FirmwareInfo firmware_info;
 extern const ConstantString * const switch_active_polarity_default;
 
 extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
+extern const bool left_switch_stop_enabled_element_default;
 
 extern const bool right_switches_enabled_default;
 
 extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
+extern const bool right_switch_stop_enabled_element_default;
 
 extern ConstantString stage_position_min_property_name;
 extern const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
+extern const long stage_position_min_element_default;
 
 extern ConstantString stage_position_max_property_name;
 extern const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
+extern const long stage_position_max_element_default;
 
 // Parameters
 extern ConstantString stage_position_parameter_name;
