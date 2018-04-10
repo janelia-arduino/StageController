@@ -17,7 +17,7 @@ namespace stage_controller
 namespace constants
 {
 
-// Interrupts
+// Pins
 
 // Units
 

@@ -17,14 +17,14 @@ CONSTANT_STRING(device_name,"stage_controller");
 CONSTANT_STRING(firmware_name,"StageController");
 // Use semantic versioning http://semver.org/
 const modular_server::FirmwareInfo firmware_info =
-  {
-   .name_ptr=&firmware_name,
-   .version_major=2,
-   .version_minor=2,
-   .version_patch=5,
-  };
+{
+  .name_ptr=&firmware_name,
+  .version_major=2,
+  .version_minor=2,
+  .version_patch=5,
+};
 
-// Interrupts
+// Pins
 
 // Units
 

@@ -42,7 +42,7 @@ void StageController::setup(bool use_drivers)
 
   // Add Hardware
 
-  // Interrupts
+  // Pins
 
   // Add Firmware
   modular_server_.addFirmware(constants::firmware_info,
