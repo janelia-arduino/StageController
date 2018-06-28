@@ -31,9 +31,9 @@ const modular_server::FirmwareInfo firmware_info =
 // Properties
 const ConstantString * const switch_active_polarity_default = &step_dir_controller::constants::polarity_high;
 
-const bool right_switches_enabled_default = true;
-
 const bool left_switch_stop_enabled_element_default = true;
+
+const bool right_switches_enabled_default = true;
 
 const bool right_switch_stop_enabled_element_default = true;
 
