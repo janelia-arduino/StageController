@@ -21,7 +21,7 @@ const modular_server::FirmwareInfo firmware_info =
   .name_ptr=&firmware_name,
   .version_major=2,
   .version_minor=2,
-  .version_patch=5,
+  .version_patch=6,
 };
 
 // Pins

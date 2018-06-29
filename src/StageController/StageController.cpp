@@ -184,9 +184,18 @@ bool StageController::home(const size_t channel)
 bool StageController::homeStage()
 {
   reinitialize();
+  bool all_homed = true;
   for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
     home(channel);
+    if (!homed(channel))
+    {
+      all_homed = false;
+    }
+  }
+  if (all_homed)
+  {
+    stage_homed_ = true;
   }
   return stage_homing_;
 }
