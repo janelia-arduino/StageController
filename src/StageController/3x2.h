@@ -3,7 +3,7 @@
 //
 //
 // Authors:
-// Peter Polidoro polidorop@janelia.hhmi.org
+// Peter Polidoro peterpolidoro@gmail.com
 // ----------------------------------------------------------------------------
 #ifndef STAGE_CONTROLLER_3X2_CONSTANTS_H
 #define STAGE_CONTROLLER_3X2_CONSTANTS_H
