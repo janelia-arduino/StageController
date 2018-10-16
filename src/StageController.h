@@ -50,7 +50,7 @@ public:
   bool stageAtTargetPosition();
 
   long limitedStagePosition(const size_t channel,
-                            const long absolute_stage_position);
+    const long absolute_stage_position);
 
 protected:
   // Handlers

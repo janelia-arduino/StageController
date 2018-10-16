@@ -46,10 +46,10 @@ void StageController::setup(bool use_drivers)
 
   // Add Firmware
   modular_server_.addFirmware(constants::firmware_info,
-                              properties_,
-                              parameters_,
-                              functions_,
-                              callbacks_);
+    properties_,
+    parameters_,
+    functions_,
+    callbacks_);
 
   // Properties
   modular_server::Property & channel_count_property = modular_server_.property(step_dir_controller::constants::channel_count_property_name);
@@ -322,7 +322,7 @@ bool StageController::stageAtTargetPosition()
 }
 
 long StageController::limitedStagePosition(const size_t channel,
-                                           const long absolute_stage_position)
+  const long absolute_stage_position)
 {
   long stage_position_min;
   modular_server_.property(constants::stage_position_min_property_name).getElementValue(channel,stage_position_min);
