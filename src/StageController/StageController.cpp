@@ -170,7 +170,7 @@ size_t StageController::getChannelCount()
   }
 }
 
-bool StageController::home(const size_t channel)
+bool StageController::home(size_t channel)
 {
   bool homing = StepDirController::home(channel);
   if (homing)
@@ -321,8 +321,8 @@ bool StageController::stageAtTargetPosition()
   return true;
 }
 
-long StageController::limitedStagePosition(const size_t channel,
-  const long absolute_stage_position)
+long StageController::limitedStagePosition(size_t channel,
+  long absolute_stage_position)
 {
   long stage_position_min;
   modular_server_.property(constants::stage_position_min_property_name).getElementValue(channel,stage_position_min);

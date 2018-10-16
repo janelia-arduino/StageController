@@ -35,7 +35,7 @@ public:
 
   typedef Array<long,step_dir_controller::constants::CHANNEL_COUNT_MAX> PositionArray;
 
-  virtual bool home(const size_t channel);
+  virtual bool home(size_t channel);
   bool homeStage();
   bool stageHoming();
   bool stageHomed();
@@ -49,8 +49,8 @@ public:
   PositionArray getStageTargetPosition();
   bool stageAtTargetPosition();
 
-  long limitedStagePosition(const size_t channel,
-    const long absolute_stage_position);
+  long limitedStagePosition(size_t channel,
+    long absolute_stage_position);
 
 protected:
   // Handlers
