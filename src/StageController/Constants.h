@@ -38,7 +38,8 @@ extern const ConstantString * const switch_active_polarity_default;
 extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
 extern const bool left_switch_stop_enabled_element_default;
 
-extern const bool right_switches_enabled_default;
+extern const bool right_switches_enabled_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX];
+extern const bool right_switches_enabled_element_default;
 
 extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
 extern const bool right_switch_stop_enabled_element_default;

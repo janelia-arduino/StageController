@@ -4,7 +4,7 @@
 
 * Library Information
   - Name :: StageController
-  - Version :: 2.2.6
+  - Version :: 2.2.7
   - License :: BSD
   - URL :: https://github.com/janelia-arduino/StageController
   - Author :: Peter Polidoro

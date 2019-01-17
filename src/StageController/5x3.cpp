@@ -19,6 +19,13 @@ namespace constants
 // Units
 
 // Properties
+const bool right_switches_enabled_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX] =
+{
+  right_switches_enabled_element_default,
+  right_switches_enabled_element_default,
+  right_switches_enabled_element_default,
+};
+
 const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
 {
   left_switch_stop_enabled_element_default,

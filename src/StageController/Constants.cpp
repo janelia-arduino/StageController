@@ -21,7 +21,7 @@ const modular_server::FirmwareInfo firmware_info =
   .name_ptr=&firmware_name,
   .version_major=2,
   .version_minor=2,
-  .version_patch=6,
+  .version_patch=7,
 };
 
 // Pins
@@ -33,7 +33,7 @@ const ConstantString * const switch_active_polarity_default = &step_dir_controll
 
 const bool left_switch_stop_enabled_element_default = true;
 
-const bool right_switches_enabled_default = true;
+const bool right_switches_enabled_element_default = true;
 
 const bool right_switch_stop_enabled_element_default = true;
 
