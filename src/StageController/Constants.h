@@ -33,7 +33,8 @@ extern const modular_server::FirmwareInfo firmware_info;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
-extern const ConstantString * const switch_active_polarity_default;
+extern const ConstantString * const switch_active_polarity_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX];
+extern const ConstantString * const switch_active_polarity_element_default;
 
 extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
 extern const bool left_switch_stop_enabled_element_default;

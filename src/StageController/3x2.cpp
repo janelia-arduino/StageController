@@ -20,9 +20,9 @@ namespace constants
 // Units
 
 // Properties
-const bool right_switches_enabled_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX] =
+const ConstantString * const switch_active_polarity_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX] =
 {
-  right_switches_enabled_element_default,
+  switch_active_polarity_element_default,
 };
 
 const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
@@ -30,6 +30,11 @@ const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHAN
   left_switch_stop_enabled_element_default,
   left_switch_stop_enabled_element_default,
   left_switch_stop_enabled_element_default,
+};
+
+const bool right_switches_enabled_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX] =
+{
+  right_switches_enabled_element_default,
 };
 
 const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
