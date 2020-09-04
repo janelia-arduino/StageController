@@ -66,7 +66,7 @@ private:
   bool stage_homing_;
   bool stage_homed_;
 
-  PositionArray jsonArrayToPositionArray(ArduinoJson::JsonArray & json_array);
+  PositionArray jsonArrayToPositionArray(ArduinoJson::JsonArray json_array);
 
   // Handlers
   void homeStageHandler();

@@ -343,18 +343,15 @@ long StageController::limitedStagePosition(size_t channel,
   return new_position;
 }
 
-StageController::PositionArray StageController::jsonArrayToPositionArray(ArduinoJson::JsonArray & json_array)
+StageController::PositionArray StageController::jsonArrayToPositionArray(ArduinoJson::JsonArray json_array)
 {
   PositionArray position_array;
 
   size_t channel = 0;
-  for (ArduinoJson::JsonArray::iterator position_array_it=json_array.begin();
-       position_array_it != json_array.end();
-       ++position_array_it)
+  for (long position : json_array)
   {
     if (channel < getChannelCount())
     {
-      long position = *position_array_it;
       position_array.push_back(position);
       ++channel;
     }
@@ -369,8 +366,8 @@ StageController::PositionArray StageController::jsonArrayToPositionArray(Arduino
 // floating-point number (float, double)
 // bool
 // const char *
-// ArduinoJson::JsonArray *
-// ArduinoJson::JsonObject *
+// ArduinoJson::JsonArray
+// ArduinoJson::JsonObject
 // const ConstantString *
 //
 // For more info read about ArduinoJson parsing https://github.com/janelia-arduino/ArduinoJson
@@ -423,10 +420,10 @@ void StageController::stageHomedHandler()
 
 void StageController::moveStageToHandler()
 {
-  ArduinoJson::JsonArray * stage_position_array_ptr;
-  modular_server_.parameter(constants::stage_position_parameter_name).getValue(stage_position_array_ptr);
+  ArduinoJson::JsonArray stage_position_array;
+  modular_server_.parameter(constants::stage_position_parameter_name).getValue(stage_position_array);
 
-  PositionArray stage_position = jsonArrayToPositionArray(*stage_position_array_ptr);
+  PositionArray stage_position = jsonArrayToPositionArray(stage_position_array);
 
   bool moving = moveStageTo(stage_position);
   modular_server_.response().returnResult(moving);
@@ -434,10 +431,10 @@ void StageController::moveStageToHandler()
 
 void StageController::moveStageSoftlyToHandler()
 {
-  ArduinoJson::JsonArray * stage_position_array_ptr;
-  modular_server_.parameter(constants::stage_position_parameter_name).getValue(stage_position_array_ptr);
+  ArduinoJson::JsonArray stage_position_array;
+  modular_server_.parameter(constants::stage_position_parameter_name).getValue(stage_position_array);
 
-  PositionArray stage_position = jsonArrayToPositionArray(*stage_position_array_ptr);
+  PositionArray stage_position = jsonArrayToPositionArray(stage_position_array);
 
   bool moving = moveStageSoftlyTo(stage_position);
   modular_server_.response().returnResult(moving);
