@@ -3,7 +3,7 @@
 //
 //
 // Authors:
-// Peter Polidoro peterpolidoro@gmail.com
+// Peter Polidoro peter@polidoro.io
 // ----------------------------------------------------------------------------
 #ifndef STAGE_CONTROLLER_CONSTANTS_H
 #define STAGE_CONTROLLER_CONSTANTS_H
