@@ -19,7 +19,7 @@ CONSTANT_STRING(firmware_name,"StageController");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=3,
+  .version_major=4,
   .version_minor=0,
   .version_patch=0,
 };

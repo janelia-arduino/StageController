@@ -4,7 +4,7 @@
 
 * Library Information
   - Name :: StageController
-  - Version :: 3.0.0
+  - Version :: 4.0.0
   - License :: BSD
   - URL :: https://github.com/janelia-arduino/StageController
   - Author :: Peter Polidoro
@@ -16,63 +16,47 @@
 
 * API NAMES
 
-  #+BEGIN_SRC js
-    {
-      "id": "getApi",
-      "result": {
-        "firmware": [
-          "StageController"
-        ],
-        "verbosity": "NAMES",
-        "functions": [
-          "homeStage",
-          "stageHoming",
-          "stageHomed",
-          "moveStageTo",
-          "moveStageSoftlyTo",
-          "getStagePosition",
-          "getStageTargetPosition",
-          "stageAtTargetPosition"
-        ],
-        "parameters": [
-          "stage_position"
-        ],
-        "properties": [
-          "stagePositionMin",
-          "stagePositionMax"
-        ]
+#+BEGIN_SRC js
+
+{
+  "id": "getApi",
+  "result": {
+    "ancestors": [
+      "ModularServer",
+      "ModularDeviceBase",
+      "StepDirController",
+      "StepperController"
+    ],
+    "firmware": [
+      {
+        "name": "StageController",
+        "version": "4.0.0"
       }
-    }
-  #+END_SRC
+    ],
+    "verbosity": "NAMES",
+    "functions": [
+      "homeStage",
+      "stageHoming",
+      "stageHomed",
+      "moveStageTo",
+      "moveStageSoftlyTo",
+      "getStagePosition",
+      "getStageTargetPosition",
+      "stageAtTargetPosition"
+    ],
+    "parameters": [
+      "stage_position"
+    ],
+    "properties": [
+      "stagePositionMin",
+      "stagePositionMax"
+    ]
+  }
+}
+
+#+END_SRC
 
 * API GENERAL
 
   [[./api/]]
 
-* Ancestors
-
-  [[https://github.com/janelia-arduino/ModularServer]]
-
-  [[https://github.com/janelia-arduino/ModularDeviceBase]]
-
-  [[https://github.com/janelia-arduino/StepDirController]]
-
-  [[https://github.com/janelia-arduino/StepperController]]
-
-* Clients
-
-* Devices
-
-  [[https://github.com/janelia-modular-devices/modular_device_base]]
-
-  [[https://github.com/janelia-modular-devices/step_dir_controller]]
-
-  [[https://github.com/janelia-modular-devices/stepper_controller]]
-
-* More Detailed Modular Device Information
-
-  [[https://github.com/janelia-modular-devices/modular-devices]]
-
-* Installation Instructions
-
-  [[https://github.com/janelia-arduino/arduino-libraries]]

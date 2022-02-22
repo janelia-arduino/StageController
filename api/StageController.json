@@ -1,8 +1,17 @@
 {
   "id": "getApi",
   "result": {
+    "ancestors": [
+      "ModularServer",
+      "ModularDeviceBase",
+      "StepDirController",
+      "StepperController"
+    ],
     "firmware": [
-      "StageController"
+      {
+        "name": "StageController",
+        "version": "4.0.0"
+      }
     ],
     "verbosity": "GENERAL",
     "functions": [
